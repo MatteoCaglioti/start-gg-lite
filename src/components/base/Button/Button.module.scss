@@ -1,0 +1,46 @@
+@use '../../../assets/styles/colors.scss';
+@use '../../../assets/styles/utils.scss';
+
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: utils.toRem(8px) utils.toRem(12px);
+  border: none;
+  border-radius: utils.toRem(4px);
+  outline-style: solid;
+  outline-color: transparent;
+  outline-width: utils.toRem(0px);
+  color: colors.$white;
+  background-color: colors.$primary-color;
+  transition: background-color 150ms ease-in-out, outline 150ms ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: colors.$button-hover;
+  }
+
+  &:focus {
+    outline-color: rgba(colors.$primary-color, 0.7);
+    outline-width: utils.toRem(4px);
+    background-color: colors.$button-focus;
+  }
+
+  &:active {
+    background-color: colors.$button-active;
+  }
+
+  &:disabled {
+    background-color: colors.$disabled-color;
+    cursor: not-allowed;
+  }
+}
+
+.icon {
+  display: flex;
+  width: utils.toRem(20px);
+  margin-left: utils.toRem(8px);
+  justify-content: center;
+  align-items: center;
+}

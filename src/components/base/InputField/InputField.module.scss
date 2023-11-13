@@ -1,0 +1,112 @@
+@use '../../../assets/styles/colors.scss';
+@use '../../../assets/styles/utils.scss';
+@use '../../../assets/styles/variables.scss';
+
+@mixin font-caption {
+  font-style: normal;
+  font-weight: 400;
+  font-size: utils.toRem(12px);
+  line-height: utils.toRem(16px);
+  letter-spacing: 0.25px;
+}
+
+.InputField {
+  position: relative;
+  width: inherit;
+  height: inherit;
+}
+
+.input {
+  font-family: inherit;
+  appearance: none;
+  width: inherit;
+  height: inherit;
+  padding: utils.toRem(8px) utils.toRem(12px);
+  border: 0;
+  border-radius: utils.toRem(4px);
+  outline: 2px solid transparent;
+  background: colors.$white;
+  transition: background-color 300ms ease-in-out, outline 300ms ease-in-out;
+
+  &:focus {
+    outline-color: rgba(colors.$primary-color, 0.7);
+    color: colors.$button-active;
+    transition: none;
+  }
+
+  &:disabled {
+    border-color: colors.$disabled-color;
+    color: colors.$disabled-color;
+    cursor: not-allowed;
+  }
+}
+
+.inputError {
+  outline-color: colors.$danger-color-700;
+  color: colors.$danger-color-700;
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: 2px solid colors.$danger-color-700;
+    color: colors.$danger-color-700;
+  }
+}
+
+.placeholder {
+  position: absolute;
+  left: utils.toRem(16px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-10%);
+  border-radius: utils.toRem(2px);
+  color: colors.$primary-color;
+  transition: top 0.3s ease, 0.3s ease, color 0.3s ease;
+  cursor: text;
+
+  &Error {
+    color: colors.$danger-color-700;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+}
+
+.input:focus+.placeholder,
+.input:focus:not(:placeholder-shown)+.placeholder,
+.input:not(:placeholder-shown)+.placeholder {
+  @include font-caption;
+  top: 0;
+  padding: 0 utils.toRem(3px);
+  background: colors.$white;
+  color: colors.$bdazzled-blue;
+}
+
+.inputError:focus:not(:placeholder-shown)+.placeholderError,
+.inputError:not(:placeholder-shown)+.placeholderError,
+.inputError:focus+.placeholderError {
+  @include font-caption;
+  top: 0;
+  padding: 0 utils.toRem(3px);
+  color: colors.$danger-color-700;
+  background: colors.$white;
+}
+
+.helperText {
+  @include font-caption;
+  position: absolute;
+  top: 0px;
+  left: 5px;
+  margin-top: utils.toRem(10px);
+  transform: translateY(-200%);
+  color: colors.$bdazzled-blue;
+
+  @include variables.breakpoint('md') {
+    top: initial;
+    transform: translateY(0%);
+  }
+
+  &Error {
+    color: colors.$danger-color-700;
+  }
+}

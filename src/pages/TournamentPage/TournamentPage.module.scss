@@ -1,0 +1,76 @@
+@use '../../assets/styles/mixins.scss';
+@use '../../assets/styles/variables.scss';
+@use '../../assets/styles/utils.scss';
+
+.TournamentPage {
+  padding: utils.toRem(20px);
+  display: flex;
+  flex-direction: column;
+  gap: utils.toRem(16px);
+  
+  @include variables.breakpoint('md') {
+    @include mixins.padding;
+  }
+}
+
+.title {
+  font-size: utils.toRem(28px);
+  font-weight: 700;
+  color: black;
+  text-decoration: underline;
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(40px);
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
+  }
+}
+
+.address {
+  font-size: utils.toRem(16px);
+  font-weight: 700;
+  margin-bottom: utils.toRem(6px);
+
+  @include variables.breakpoint('md') {
+    margin-bottom: utils.toRem(8px);
+    font-size: utils.toRem(24px);
+  }
+}
+
+.primaryContact {
+  font-size: utils.toRem(14px);
+  font-weight: 700;
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(20px);
+  }
+}
+
+.streams {
+  display: flex;
+  flex-direction: column;
+  gap: utils.toRem(8px);
+  
+  & > a {
+    font-size: utils.toRem(14px);
+    width: fit-content;
+
+    @include variables.breakpoint('md') {
+      font-size: utils.toRem(16px);
+    }
+  }
+}
+
+.details {
+  font-size: utils.toRem(16px);
+  display: flex;
+  flex-direction: column;
+  gap: utils.toRem(16px);
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(20px);
+  }
+}

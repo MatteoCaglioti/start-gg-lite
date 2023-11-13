@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+// Breakpoints
+$breakpoints: (
+  sm: 375px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1440px,
+);
+
+@mixin breakpoint($name) {
+  @if not map-has-key($breakpoints, $name) {
+    @warn "Invalid breakpoint `#{$name}`.";
+  }
+
+  @else {
+    @media (min-width: map-get($breakpoints, $name)) {
+      @content;
+    }
+  }
+}
+
+// FONTS
+$font-size-base: 16px;
+$font-family-base: Source Sans Pro, sans-serif;
+
+// SIZES
+$header-height-desktop: 7rem; // 80px
+$header-height-mobile: 5rem; // 64px
+
+// z-index
+$z-index-modal-header: 10;
+$z-index-modal-content: 9;
+$z-index-modal-footer: 8;
+$z-index-header: 100;
+$z-index-secondary-nav: 90;
+$z-index-steps-footer: 5;
+$z-index-steps-container: 20;
+$z-index-tooltip-wrapper: 5;
+$z-index-tooltip: 10;

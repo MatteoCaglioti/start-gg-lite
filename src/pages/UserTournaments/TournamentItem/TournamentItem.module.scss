@@ -1,0 +1,111 @@
+@use '../../../assets/styles/colors.scss';
+@use '../../../assets/styles/utils.scss';
+@use '../../../assets/styles/variables.scss';
+@use '../../../assets/styles/mixins.scss';
+
+.TournamentItem {
+  margin-top: utils.toRem(30px);
+  border: 1px solid rgba(colors.$oxford-blue, 0.3);
+
+  @include variables.breakpoint('md') {
+    margin-top: utils.toRem(45px);
+  }
+
+  &:first-child {
+    margin-top: utils.toRem(10px);
+
+    @include variables.breakpoint('md') {
+      margin-top: utils.toRem(20px);
+    }
+  }
+}
+
+.inner {
+  display: block;
+  padding: utils.toRem(20px);
+  transition: background-color 150ms ease-in-out, outline 150ms ease-in-out;
+  outline: 1px solid rgba(colors.$primary-color, 0.5);
+  background-color: rgba(colors.$white, 0.5);
+  
+  &:hover,
+  &:focus {
+    background-color: rgba(colors.$white, 0.2);
+  }
+}
+
+.defaultInformation {
+  display: flex;
+}
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+}
+
+.imageWrapper {
+  width: utils.toRem(40px);
+  height: utils.toRem(40px);
+}
+
+.image {
+  width: inherit;
+  height: inherit;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  color: transparent;
+}
+
+.tournamentName {
+  color: colors.$oxford-blue;
+  margin-left: utils.toRem(8px);
+  font-style: normal;
+  font-weight: 700;
+  font-size: utils.toRem(14px);
+  line-height: utils.toRem(20px);
+  letter-spacing: 0.25px;
+
+  @include variables.breakpoint('md') {
+    margin-left: utils.toRem(24px);
+    font-size: utils.toRem(16px);
+    line-height: utils.toRem(24px);
+    letter-spacing: 0.15px;
+  }
+}
+
+.tournamentAddress {
+  color: colors.$oxford-blue;
+  margin-left: utils.toRem(8px);
+  font-style: normal;
+  font-size: utils.toRem(12px);
+  line-height: utils.toRem(20px);
+  letter-spacing: 0.25px;
+
+  @include variables.breakpoint('md') {
+    margin-left: utils.toRem(24px);
+    font-size: utils.toRem(14px);
+    line-height: utils.toRem(24px);
+    letter-spacing: 0.15px;
+  }
+}
+
+.button {
+  align-self: flex-end;
+  width: max-content;
+  white-space: nowrap;
+  padding: 0;
+  background-color: transparent;
+  color: colors.$primary-color;
+  padding: utils.toRem(2px);
+
+  &:hover {
+    background-color: transparent;
+  }
+
+  &:focus {
+    background-color: transparent;
+    outline-width: utils.toRem(1px);
+  }
+}

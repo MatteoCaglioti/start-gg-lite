@@ -1,0 +1,74 @@
+@use 'variables';
+@use 'colors';
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: colors.$app-background;
+}
+
+html {
+  font-size: variables.$font-size-base;
+  font-family: variables.$font-family-base;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+blockquote,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+figure {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+}

@@ -1,0 +1,48 @@
+@use '../../assets/styles/colors.scss';
+@use '../../assets/styles/utils.scss';
+@use '../../assets/styles/variables.scss';
+@use '../../assets/styles/mixins.scss';
+
+.UserTournaments {
+  @include mixins.padding;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: utils.toRem(30px);
+
+  @include variables.breakpoint('md') {
+    width: max-content;
+    flex-direction: row;
+    align-items: center;
+    margin-top: utils.toRem(40px);
+  }
+}
+
+.title {
+  font-size: utils.toRem(22px);
+  font-weight: 700;
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(32px);
+  }
+}
+
+.button {
+  width: 100%;
+  margin-top: utils.toRem(10px);
+
+  @include variables.breakpoint('md') {
+    margin-top: 0;
+    margin-left: utils.toRem(10px);
+  }
+}
+
+.noResults {
+  margin-top: utils.toRem(15px);
+}

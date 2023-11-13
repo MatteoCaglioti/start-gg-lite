@@ -1,0 +1,74 @@
+@use '../../../assets/styles/colors.scss';
+@use '../../../assets/styles/utils.scss';
+@use '../../../assets/styles/variables.scss';
+
+.header {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: variables.$z-index-header;
+  width: 100%;
+  height: variables.$header-height-mobile;
+  padding: 0 15%;
+  flex-shrink: 0;
+  border-bottom: 1px solid colors.$bdazzled-blue;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  background-color: colors.$header-color;
+
+  @include variables.breakpoint('md') {
+    height: variables.$header-height-desktop;
+    padding: 0 20%;
+  }
+}
+
+.logoWrapper {
+  width: utils.toRem(150px);
+  padding: utils.toRem(8px);
+
+  @include variables.breakpoint('md') {
+    width: utils.toRem(250px);
+  }
+}
+
+.logo {
+  width: 100%;
+}
+
+.navigation {
+  justify-items: flex-end;
+  margin: 0 0 0 auto;
+}
+
+.navigationWrapper {
+  display: flex;
+  gap: utils.toRem(10px);
+
+  @include variables.breakpoint('md') {
+    gap: utils.toRem(20px);
+  }
+}
+
+.navigationLink {
+  padding: utils.toRem(10px);
+  color: colors.$white;
+  transition: background-color 150ms ease-in-out, outline 150ms ease-in-out;
+  border-radius: utils.toRem(4px);
+  outline: 1px solid transparent;
+  font-size: utils.toRem(16px);
+
+  @include variables.breakpoint('md') {
+    height: variables.$header-height-desktop;
+    padding: 0 20%;
+    font-size: utils.toRem(20px);
+  }
+
+  &:hover,
+  &:focus {
+    outline-color: colors.$white;
+    background-color: rgba(colors.$primary-color, 0.15);
+  }
+
+
+}

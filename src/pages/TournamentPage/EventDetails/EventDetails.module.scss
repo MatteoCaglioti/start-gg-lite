@@ -1,0 +1,29 @@
+@use '../../../assets/styles/colors.scss';
+@use '../../../assets/styles/utils.scss';
+@use '../../../assets/styles/variables.scss';
+@use '../../../assets/styles/mixins.scss';
+
+.title {
+  font-size: utils.toRem(22px);
+  font-weight: 700;
+  margin-bottom: utils.toRem(8px);
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(32px);
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: utils.toRem(8px);
+}
+
+.detail {
+  font-size: utils.toRem(14px);
+  width: fit-content;
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(20px);
+  }
+}

@@ -1,0 +1,89 @@
+@use '../../assets/styles/colors.scss';
+@use '../../assets/styles/utils.scss';
+@use '../../assets/styles/variables.scss';
+@use '../../assets/styles/mixins.scss';
+
+.HomePage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  @include mixins.padding;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: colors.$oxford-blue;
+  color: colors.$grey;
+}
+
+.title {
+  font-size: utils.toRem(24px);
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(46px);
+  }
+}
+
+.description {
+  margin-top: utils.toRem(10px);
+  font-size: utils.toRem(16px);
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(20px);
+  }
+}
+
+.content {
+  @include mixins.padding;
+  color: colors.$oxford-blue;
+}
+
+.contentTitle {
+  font-size: utils.toRem(18px);
+  font-weight: 900;
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(24px);
+  }
+}
+
+.contentDescription {
+  margin-top: utils.toRem(10px);
+  font-size: utils.toRem(16px);
+  font-weight: 500;
+
+  @include variables.breakpoint('md') {
+    font-size: utils.toRem(18px);
+  }
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: utils.toRem(50px);
+
+  @include variables.breakpoint('md') {
+    flex-direction: row;
+  }
+}
+
+.centeredImage {
+  display: flex;
+  align-self: flex-start;
+  margin-top: utils.toRem(10px);
+  margin-left: 0;
+
+  @include variables.breakpoint('md') {
+    margin-top: 0;
+    margin-left: utils.toRem(10px);
+    align-self: center;
+  }
+}
+
+.image {
+  max-width: 100%;
+}

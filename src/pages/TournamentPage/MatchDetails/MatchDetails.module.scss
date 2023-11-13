@@ -1,0 +1,154 @@
+@use '../../../assets/styles/colors.scss';
+@use '../../../assets/styles/utils.scss';
+@use '../../../assets/styles/variables.scss';
+@use '../../../assets/styles/mixins.scss';
+
+.MatchDetails {
+  border: 1px solid rgba(colors.$oxford-blue, 0.3);
+  border-radius: utils.toRem(5px);
+  display: block;
+  transition: background-color 150ms ease-in-out, outline 150ms ease-in-out;
+  outline: 1px solid rgba(colors.$primary-color, 0.5);
+  background-color: rgba(colors.$white, 0.5);
+}
+
+.noResults {
+  margin-top: utils.toRem(15px);
+}
+
+.header {
+  padding: utils.toRem(20px);
+  border-bottom: 1px solid rgba(colors.$oxford-blue, 0.3);
+}
+
+.matches {
+  padding: utils.toRem(20px);
+}
+
+.match {
+  display: flex;
+  padding: utils.toRem(16px);
+  border-left: 1px solid rgba(colors.$oxford-blue, 0.3);
+  margin-bottom: utils.toRem(20px);
+  font-size: utils.toRem(14px);
+  flex-direction: row;
+
+  @include variables.breakpoint('md') {
+    padding: utils.toRem(20px);
+    font-size: utils.toRem(20px);
+  }
+
+  @include variables.breakpoint('lg') {
+    word-wrap: break-word;
+  }
+}
+
+.dash {
+  display: none;
+
+  @include variables.breakpoint('lg') {
+    display: block;
+  }
+}
+
+.setDetails {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  @include variables.breakpoint('lg') {
+    flex-direction: column;
+  }
+}
+
+.round {
+  width: 100%;
+  display: flex;
+  color: rgba(colors.$oxford-blue, 0.7);
+  gap: utils.toRem(8px);
+  flex-direction: column;
+  flex-basis: 50%;
+  font-weight: 700;
+  font-size: utils.toRem(14px);
+
+  @include variables.breakpoint('lg') {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.setDetail {
+  text-transform: uppercase;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.not_started {
+  color: grey;
+}
+
+.in_progress {
+  color: blue;
+}
+
+.completed {
+  color: rgb(13, 130, 37);
+}
+
+.opponent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: utils.toRem(8px);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  text-align: right;
+
+  @include variables.breakpoint('lg') {
+    gap: utils.toRem(16px);
+    margin-top: utils.toRem(6px);
+    justify-content: initial;
+    text-align: inherit;
+  }
+}
+
+.phaseTime {
+  display: flex;
+  gap: utils.toRem(8px);
+}
+
+.versus {
+  color: rgba(colors.$oxford-blue, 0.7);
+}
+
+.displayScore {
+  white-space: nowrap;
+
+  &_mobile {
+    @include variables.breakpoint('lg') {
+      display: none;
+    }
+  }
+
+  &_desktop {
+    display: none;
+
+    @include variables.breakpoint('lg') {
+      display: block;
+      align-self: center;
+      font-size: utils.toRem(30px);
+    }
+  }
+
+  @include variables.breakpoint('lg') {
+    margin-left: auto;
+  }
+}
+
+.winner {
+  color: rgb(13, 130, 37);
+}
+
+.loser {
+  color: rgb(218, 26, 26);
+}
