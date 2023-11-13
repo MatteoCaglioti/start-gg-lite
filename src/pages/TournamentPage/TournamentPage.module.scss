@@ -1,12 +1,14 @@
 @use '../../assets/styles/mixins.scss';
 @use '../../assets/styles/variables.scss';
 @use '../../assets/styles/utils.scss';
+@use '../../assets/styles/colors.scss';
 
 .TournamentPage {
   padding: utils.toRem(20px);
   display: flex;
   flex-direction: column;
   gap: utils.toRem(16px);
+  color: colors.$oxford-blue;
   
   @include variables.breakpoint('md') {
     @include mixins.padding;
@@ -16,8 +18,8 @@
 .title {
   font-size: utils.toRem(28px);
   font-weight: 700;
-  color: black;
   text-decoration: underline;
+  color: colors.$oxford-blue;
 
   @include variables.breakpoint('md') {
     font-size: utils.toRem(40px);
