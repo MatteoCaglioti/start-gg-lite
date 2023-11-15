@@ -13,7 +13,6 @@ const GET_TOURNAMENT_INFORMATION = gql`
       events{
         id
         checkInBuffer
-        startAt
         name
         numEntrants
         tournament{
@@ -51,7 +50,6 @@ const GET_TOURNAMENT_INFORMATION = gql`
           nodes{
             id
             winnerId
-            startAt
             phaseGroup {
               id
               startAt
