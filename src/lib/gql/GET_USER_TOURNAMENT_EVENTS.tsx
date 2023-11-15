@@ -21,6 +21,7 @@ const GET_TOURNAMENT_INFORMATION = gql`
           timezone
           countryCode
           venueAddress
+          mapsPlaceId
           primaryContact
           url(tab: "", relative: false)
           startAt

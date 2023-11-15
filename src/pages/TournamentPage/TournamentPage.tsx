@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import cx from 'classnames';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import useQueryParameters from '../../lib/util/useQueryParameters';
 import styles from './TournamentPage.module.scss';
 import GET_USER_TOURNAMENT_EVENTS from '../../lib/gql/GET_USER_TOURNAMENT_EVENTS';
@@ -34,9 +34,11 @@ const TournamentPage = () => {
     error,
   } = useQuery(GET_USER_TOURNAMENT_EVENTS, {
     variables: { id: participantId, userId },
-    fetchPolicy: 'network-only', // change to cache-only for testing
+    fetchPolicy: 'network-only', // change to cache-first for testing
     skip: (!participantId),
   });
+
+  const mapsUrl = useMemo(() => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(data?.participant?.events?.[0]?.tournament?.venueAddress || '')}&query_place_id=${data?.participant?.events[0]?.tournament?.mapsPlaceId || ''}`, [data?.participant?.events?.[0]?.tournament?.venueAddress, loading]);
 
   if (error) {
     return null;
@@ -58,9 +60,9 @@ const TournamentPage = () => {
             {data?.participant?.events?.[0]?.tournament?.name}
           </a>
           <div>
-            <p className={cx(styles.address)}>
+            <a href={mapsUrl} className={cx(styles.address)}>
               {data?.participant?.events?.[0]?.tournament?.venueAddress}
-            </p>
+            </a>
             {
               tournamentStartTime
               && tournamentEndTime && (

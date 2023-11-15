@@ -32,13 +32,21 @@
 }
 
 .address {
+  margin-bottom: utils.toRem(6px);
   font-size: utils.toRem(16px);
   font-weight: 700;
-  margin-bottom: utils.toRem(6px);
+  color: colors.$oxford-blue;
+  text-decoration: underline;
+
 
   @include variables.breakpoint('md') {
     margin-bottom: utils.toRem(8px);
     font-size: utils.toRem(24px);
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.8;
   }
 }
 
