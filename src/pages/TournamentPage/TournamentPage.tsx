@@ -112,7 +112,6 @@ const TournamentPage = () => {
                   (entrant: any) => entrant.id,
                 )}
               />
-              {loading ? 'loading...' : ''}
             </div>
           ))}
         </>
