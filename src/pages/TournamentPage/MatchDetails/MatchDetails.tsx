@@ -113,7 +113,7 @@ const Match: FC<MatchProps> = ({
           <p className={cx(styles.versus)}>vs</p>
           {opponentSlot?.entrant?.name ? (
             <a className={cx(styles.opponentName)} href={`https://www.start.gg/${eventSlug}/entrant/${opponentEntrantId}`} target="blank">
-              {opponentSlot?.entrant?.name || 'N/A'}
+              {opponentSlot?.entrant?.name}
             </a>
           ) : (<p>N/A</p>)}
 
