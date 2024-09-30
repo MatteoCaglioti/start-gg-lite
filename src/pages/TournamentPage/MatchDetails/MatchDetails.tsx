@@ -14,6 +14,7 @@ export interface MatchProps<TData = any> {
   entrantIds: string[];
   timezone?: string;
   countryCode?: string;
+  eventSlug?: string;
 }
 
 const Match: FC<MatchProps> = ({
@@ -21,6 +22,7 @@ const Match: FC<MatchProps> = ({
   entrantIds,
   countryCode,
   timezone,
+  eventSlug,
 }) => {
   const setStartTime = setDetails?.phaseGroup?.startAt
     ? new Date(setDetails.phaseGroup.startAt * 1000)
@@ -30,9 +32,11 @@ const Match: FC<MatchProps> = ({
     (slot: any) => !entrantIds.includes(slot?.entrant?.id),
   );
 
+  const opponentEntrantId = opponentSlot?.entrant?.id;
+
   const opponentSeed = opponentSlot?.seed?.seedNum;
 
-  const opponentIsWinner = opponentSlot?.entrant?.id === setDetails.winnerId;
+  const opponentIsWinner = opponentEntrantId === setDetails.winnerId;
 
   const setDisplayScore = useMemo(() => {
     if (setDetails?.displayScore) {
@@ -107,9 +111,12 @@ const Match: FC<MatchProps> = ({
         </span>
         <div className={cx(styles.opponent)}>
           <p className={cx(styles.versus)}>vs</p>
-          <p className={cx(styles.opponentName)}>
-            {opponentSlot?.entrant?.name || 'N/A'}
-          </p>
+          {opponentSlot?.entrant?.name ? (
+            <a className={cx(styles.opponentName)} href={`https://www.start.gg/${eventSlug}/entrant/${opponentEntrantId}`}>
+              {opponentSlot?.entrant?.name || 'N/A'}
+            </a>
+          ) : (<p>N/A</p>)}
+
           <p
             className={cx(styles.displayScore, styles.displayScore_mobile, {
               [styles.winner]: !opponentIsWinner,
@@ -137,6 +144,7 @@ const MatchDetails: FC<MatchDetailsProps> = ({ event, entrantIds }) => {
     return <p className={styles.noResults}>No Sets Played</p>;
   }
 
+  console.log(event?.slug);
   return (
     <div className={cx(styles.MatchDetails)}>
       <div className={cx(styles.header)}>
@@ -150,6 +158,7 @@ const MatchDetails: FC<MatchDetailsProps> = ({ event, entrantIds }) => {
             entrantIds={entrantIds}
             timezone={event?.tournament?.timezone}
             countryCode={event?.tournament?.countryCode}
+            eventSlug={event?.slug}
           />
         ))}
       </div>

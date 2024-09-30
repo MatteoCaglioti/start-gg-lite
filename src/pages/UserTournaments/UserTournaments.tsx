@@ -11,6 +11,7 @@ import TournamentList from './TournamentList';
 import useQueryParameters from '../../lib/util/useQueryParameters';
 import { USER_SLUG } from '../../lib/constants/queries';
 import GET_USER_DATA from '../../lib/gql/GET_USER_DATA';
+import Loader from '../../components/base/Loader';
 
 const UserTournaments = () => {
   const queryParameters = useQueryParameters();
@@ -86,7 +87,7 @@ const UserTournaments = () => {
       />
       <div className={styles.noResults}>
         {hasNoResults ? 'No results found.' : ''}
-        {loading ? 'loading...' : ''}
+        <Loader isLoading={loading} />
       </div>
     </div>
   );

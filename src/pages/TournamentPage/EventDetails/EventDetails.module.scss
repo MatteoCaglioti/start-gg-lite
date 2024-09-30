@@ -22,6 +22,7 @@
 .detail {
   font-size: utils.toRem(14px);
   width: fit-content;
+  font-weight: bold;
 
   @include variables.breakpoint('md') {
     font-size: utils.toRem(20px);

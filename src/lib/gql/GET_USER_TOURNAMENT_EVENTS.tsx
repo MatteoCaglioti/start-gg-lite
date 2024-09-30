@@ -11,6 +11,7 @@ const GET_TOURNAMENT_INFORMATION = gql`
         id
         checkInBuffer
         name
+        slug
         numEntrants
         tournament{
           name
@@ -28,6 +29,7 @@ const GET_TOURNAMENT_INFORMATION = gql`
           }
         }
         userEntrant(userId: $userId) {
+          id
           standing {
             id
             placement
