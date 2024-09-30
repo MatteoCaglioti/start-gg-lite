@@ -2,12 +2,7 @@ import cx from 'classnames';
 import React, { FC, useMemo } from 'react';
 import styles from './MatchDetails.module.scss';
 
-const MATCH_STATE = [
-  '',
-  'Not Started',
-  'In Progress',
-  'Completed',
-] as const;
+const MATCH_STATE = ['', 'Not Started', 'In Progress', 'Completed'] as const;
 
 export interface MatchDetailsProps<TData = any> {
   event: TData;
@@ -22,7 +17,10 @@ export interface MatchProps<TData = any> {
 }
 
 const Match: FC<MatchProps> = ({
-  setDetails, entrantIds, countryCode, timezone,
+  setDetails,
+  entrantIds,
+  countryCode,
+  timezone,
 }) => {
   const setStartTime = setDetails?.phaseGroup?.startAt
     ? new Date(setDetails.phaseGroup.startAt * 1000)
@@ -31,6 +29,8 @@ const Match: FC<MatchProps> = ({
   const opponentSlot = setDetails.slots.find(
     (slot: any) => !entrantIds.includes(slot?.entrant?.id),
   );
+
+  const opponentSeed = opponentSlot?.seed?.seedNum;
 
   const opponentIsWinner = opponentSlot?.entrant?.id === setDetails.winnerId;
 
@@ -42,7 +42,9 @@ const Match: FC<MatchProps> = ({
       }
       const minValue = Math.min(...setValues);
       const maxValue = Math.max(...setValues);
-      return opponentIsWinner ? `${minValue} - ${maxValue}` : `${maxValue} - ${minValue}`;
+      return opponentIsWinner
+        ? `${minValue} - ${maxValue}`
+        : `${maxValue} - ${minValue}`;
     }
     return '';
   }, [opponentSlot?.entrant?.id, setDetails?.displayScore]);
@@ -66,67 +68,63 @@ const Match: FC<MatchProps> = ({
                 state = Math.floor(state / 2);
               }
               return (
-                <p key={setDetail} className={cx(styles[((MATCH_STATE[state]).toLowerCase()).replace(' ', '_')])}>
+                <p
+                  key={setDetail}
+                  className={cx(
+                    styles[MATCH_STATE[state].toLowerCase().replace(' ', '_')],
+                  )}
+                >
                   {MATCH_STATE[state]}
+                  {opponentSeed && (
+                    <span className={cx(styles.seed)}>
+                      &nbsp;(Seed&nbsp;
+                      {opponentSeed}
+                      )
+                    </span>
+                  )}
                 </p>
               );
             }
             return (
               <React.Fragment key={setDetail}>
-                <p className={cx(styles.setDetail)}>
-                  {setDetail}
-                </p>
-                <p className={cx(styles.dash)}>
-                  -
-                </p>
+                <p className={cx(styles.setDetail)}>{setDetail}</p>
+                <p className={cx(styles.dash)}>-</p>
               </React.Fragment>
             );
           })}
-          {setStartTime && countryCode && timezone
-            && (
-              <>
-                <p className={cx(styles.dash)}>
-                  -
-                </p>
-                <p className={cx(styles.phaseTime)}>
-                  <span>
-                    {setStartTime.toLocaleString(countryCode, { timeZone: timezone })}
-                  </span>
-                </p>
-              </>
-            )}
+          {setStartTime && countryCode && timezone && (
+            <>
+              <p className={cx(styles.dash)}>-</p>
+              <p className={cx(styles.phaseTime)}>
+                <span>
+                  {setStartTime.toLocaleString(countryCode, {
+                    timeZone: timezone,
+                  })}
+                </span>
+              </p>
+            </>
+          )}
         </span>
         <div className={cx(styles.opponent)}>
-          <p className={cx(styles.versus)}>
-            vs
-          </p>
+          <p className={cx(styles.versus)}>vs</p>
           <p className={cx(styles.opponentName)}>
-            {
-              opponentSlot?.entrant?.name || 'N/A'
-            }
+            {opponentSlot?.entrant?.name || 'N/A'}
           </p>
           <p
-            className={cx(
-              styles.displayScore,
-              styles.displayScore_mobile,
-              {
-                [styles.winner]: !opponentIsWinner,
-                [styles.loser]: opponentIsWinner,
-              },
-            )}
+            className={cx(styles.displayScore, styles.displayScore_mobile, {
+              [styles.winner]: !opponentIsWinner,
+              [styles.loser]: opponentIsWinner,
+            })}
           >
             {setDisplayScore}
           </p>
         </div>
       </div>
-      <div className={cx(
-        styles.displayScore,
-        styles.displayScore_desktop,
-        {
+      <div
+        className={cx(styles.displayScore, styles.displayScore_desktop, {
           [styles.winner]: !opponentIsWinner,
           [styles.loser]: opponentIsWinner,
-        },
-      )}
+        })}
       >
         {setDisplayScore}
       </div>
@@ -136,11 +134,7 @@ const Match: FC<MatchProps> = ({
 
 const MatchDetails: FC<MatchDetailsProps> = ({ event, entrantIds }) => {
   if (event?.sets?.nodes.length === 0) {
-    return (
-      <p className={styles.noResults}>
-        No Sets Played
-      </p>
-    );
+    return <p className={styles.noResults}>No Sets Played</p>;
   }
 
   return (

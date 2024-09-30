@@ -42,12 +42,11 @@ const TournamentItem: FC<Props> = ({
         <div className={styles.defaultInformation}>
           <div className={styles.container}>
             <div className={styles.imageWrapper}>
-              {/* <img className={styles.image} src={tournamentImage} alt="Tournament" /> */}
-              <object
+              <img
                 className={styles.image}
-                data={tournamentImage}
+                src={tournamentImage}
                 aria-label="Tournament Image"
-                type="image/jpeg"
+                loading="lazy"
               />
             </div>
             <div>

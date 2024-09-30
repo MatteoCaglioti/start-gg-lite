@@ -6,9 +6,6 @@ const GET_TOURNAMENT_INFORMATION = gql`
       id
       entrants{
         id
-        event{
-          id
-        }
       }
       events{
         id
@@ -34,6 +31,17 @@ const GET_TOURNAMENT_INFORMATION = gql`
           standing {
             id
             placement
+          }
+          seeds {
+            id
+            seedNum
+            players {
+              gamerTag
+            }
+          }
+          participants {
+            id
+            gamerTag
           }
         }
         sets(
@@ -64,6 +72,9 @@ const GET_TOURNAMENT_INFORMATION = gql`
               entrant{
                 id
                 name
+              }
+              seed {
+                seedNum
               }
             }
             state

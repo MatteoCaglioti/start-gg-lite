@@ -90,7 +90,7 @@ const TournamentPage = () => {
           )}
           {data?.participant?.events.map((event: any) => (
             <div className={cx(styles.details)} key={event?.name}>
-              <EventDetails event={event} />
+              <EventDetails event={event} mainParticipantId={data.participant.id} />
               <MatchDetails
                 event={event}
                 entrantIds={
