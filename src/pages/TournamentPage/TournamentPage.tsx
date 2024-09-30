@@ -108,7 +108,7 @@ const TournamentPage = () => {
               />
               <MatchDetails
                 event={event}
-                entrantIds={data?.participant?.entrants.map(
+                entrantIds={data?.participant?.entrants?.map(
                   (entrant: any) => entrant.id,
                 )}
               />
