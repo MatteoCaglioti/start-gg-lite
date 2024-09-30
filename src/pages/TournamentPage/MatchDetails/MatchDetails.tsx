@@ -112,7 +112,7 @@ const Match: FC<MatchProps> = ({
         <div className={cx(styles.opponent)}>
           <p className={cx(styles.versus)}>vs</p>
           {opponentSlot?.entrant?.name ? (
-            <a className={cx(styles.opponentName)} href={`https://www.start.gg/${eventSlug}/entrant/${opponentEntrantId}`}>
+            <a className={cx(styles.opponentName)} href={`https://www.start.gg/${eventSlug}/entrant/${opponentEntrantId}`} target="blank">
               {opponentSlot?.entrant?.name || 'N/A'}
             </a>
           ) : (<p>N/A</p>)}
@@ -144,7 +144,6 @@ const MatchDetails: FC<MatchDetailsProps> = ({ event, entrantIds }) => {
     return <p className={styles.noResults}>No Sets Played</p>;
   }
 
-  console.log(event?.slug);
   return (
     <div className={cx(styles.MatchDetails)}>
       <div className={cx(styles.header)}>
