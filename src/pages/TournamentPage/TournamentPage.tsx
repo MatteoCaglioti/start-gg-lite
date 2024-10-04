@@ -43,7 +43,7 @@ const TournamentPage = () => {
     () => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
       data?.participant?.events?.[0]?.tournament?.venueAddress || '',
     )}&query_place_id=${
-      data?.participant?.events[0]?.tournament?.mapsPlaceId || ''
+      data?.participant?.events?.[0]?.tournament?.mapsPlaceId || ''
     }`,
     [data?.participant?.events?.[0]?.tournament?.venueAddress, loading],
   );
