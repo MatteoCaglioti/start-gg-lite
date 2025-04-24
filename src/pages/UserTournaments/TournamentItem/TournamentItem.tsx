@@ -1,5 +1,6 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
+import cx from 'classnames';
 import styles from './TournamentItem.module.scss';
 import {
   PARTICIPANT_ID, TOURNAMENT_ID, USER_ID,
@@ -14,6 +15,7 @@ const TournamentItem: FC<Props> = ({
   tournament,
   userSlug,
 }) => {
+  const [showTournamentItem, setShowTournamentItem] = useState(false);
   const { id: tournamentId, name, venueAddress } = tournament;
 
   const tournamentInformationPath = useMemo(() => {
@@ -36,8 +38,15 @@ const TournamentItem: FC<Props> = ({
     return null;
   }
 
+  const showTournamentItemOnImageLoad = () => {
+    setShowTournamentItem(true);
+  };
+
   return (
-    <div className={styles.TournamentItem}>
+    <div className={cx(styles.TournamentItem, {
+      [styles.TournamentItemShow]: showTournamentItem,
+    })}
+    >
       <Link className={styles.inner} to={tournamentInformationPath}>
         <div className={styles.defaultInformation}>
           <div className={styles.container}>
@@ -47,6 +56,7 @@ const TournamentItem: FC<Props> = ({
                 src={tournamentImage}
                 aria-label="Tournament Image"
                 loading="lazy"
+                onLoad={() => { showTournamentItemOnImageLoad(); }}
               />
             </div>
             <div>

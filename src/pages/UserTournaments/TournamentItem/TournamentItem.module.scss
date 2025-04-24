@@ -6,6 +6,8 @@
 .TournamentItem {
   margin-top: utils.toRem(30px);
   border: 1px solid rgba(colors.$oxford-blue, 0.3);
+  opacity: 0;
+  transition: opacity 0.5s;
 
   @include variables.breakpoint('md') {
     margin-top: utils.toRem(45px);
@@ -17,6 +19,10 @@
     @include variables.breakpoint('md') {
       margin-top: utils.toRem(20px);
     }
+  }
+
+  &Show {
+    opacity: 1;
   }
 }
 
