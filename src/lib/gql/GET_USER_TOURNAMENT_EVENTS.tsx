@@ -1,7 +1,22 @@
 import { gql } from '@apollo/client';
 
 const GET_TOURNAMENT_INFORMATION = gql`
-  query getParticipantEvents($id: ID!, $userId: ID!) {
+  query getParticipantEvents($id: ID!, $userId: ID!, $tournamentId: ID!) {
+    tournament(id: $tournamentId) {
+      name
+      timezone
+      countryCode
+      venueAddress
+      mapsPlaceId
+      primaryContact
+      url(tab: "", relative: false)
+      startAt
+      endAt
+      streams {
+        streamName
+        streamSource
+      }
+    }
     participant (id: $id){
       id
       entrants{

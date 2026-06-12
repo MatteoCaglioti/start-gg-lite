@@ -4,7 +4,7 @@ import React, { useMemo, useState } from 'react';
 import useQueryParameters from '../../lib/util/useQueryParameters';
 import styles from './TournamentPage.module.scss';
 import GET_USER_TOURNAMENT_EVENTS from '../../lib/gql/GET_USER_TOURNAMENT_EVENTS';
-import { PARTICIPANT_ID, USER_ID } from '../../lib/constants/queries';
+import { PARTICIPANT_ID, TOURNAMENT_ID, USER_ID } from '../../lib/constants/queries';
 import MatchDetails from './MatchDetails';
 import EventDetails from './EventDetails';
 import Loader from '../../components/base/Loader';
@@ -31,31 +31,47 @@ const TournamentPage = () => {
     queryParameters.get(PARTICIPANT_ID) || '',
   );
   const [userId] = useState<string>(queryParameters.get(USER_ID) || '');
-
+  const [tournamentId] = useState<string>(
+    queryParameters.get(TOURNAMENT_ID) || '',
+  );
   // add query to find next opponent (waiting for winner of set)
   const { data, loading, error } = useQuery(GET_USER_TOURNAMENT_EVENTS, {
-    variables: { id: participantId, userId },
+    variables: { id: participantId, userId, tournamentId },
     fetchPolicy: 'network-only', // change to cache-first for testing
     skip: !participantId,
   });
 
+  const tournamentData = data?.tournament || data?.participant?.events?.[0]?.tournament;
+
   const mapsUrl = useMemo(
     () => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      data?.participant?.events?.[0]?.tournament?.venueAddress || '',
+      tournamentData?.venueAddress || '',
     )}&query_place_id=${
-      data?.participant?.events?.[0]?.tournament?.mapsPlaceId || ''
+      tournamentData?.mapsPlaceId || ''
     }`,
-    [data?.participant?.events?.[0]?.tournament?.venueAddress, loading],
+    [tournamentData?.venueAddress, loading],
   );
 
   if (error) {
     return null;
   }
 
-  const tourneyStreams = data?.participant?.events?.[0]?.tournament?.streams;
-  const tournamentStartTime = data?.participant?.events?.[0]?.tournament?.startAt;
-  const tournamentEndTime = data?.participant?.events?.[0]?.tournament?.endAt;
-  const tournamentURL = data?.participant?.events?.[0]?.tournament?.url;
+  let tourneyStreams = null;
+  let tournamentStartTime = null;
+  let tournamentEndTime = null;
+  let tournamentURL = null;
+
+  if (data?.participant?.events === null) {
+    tourneyStreams = tournamentData?.streams;
+    tournamentStartTime = tournamentData?.startAt;
+    tournamentEndTime = tournamentData?.endAt;
+    tournamentURL = tournamentData?.url;
+  } else {
+    tourneyStreams = tournamentData?.streams;
+    tournamentStartTime = tournamentData?.startAt;
+    tournamentEndTime = tournamentData?.endAt;
+    tournamentURL = tournamentData?.url;
+  }
 
   return (
     <div className={cx(styles.TournamentPage)}>
@@ -63,11 +79,11 @@ const TournamentPage = () => {
       {!loading && (
         <>
           <a className={cx(styles.title)} href={tournamentURL}>
-            {data?.participant?.events?.[0]?.tournament?.name}
+            {tournamentData?.name}
           </a>
           <div>
             <a href={mapsUrl} className={cx(styles.address)}>
-              {data?.participant?.events?.[0]?.tournament?.venueAddress}
+              {tournamentData?.venueAddress}
             </a>
             {tournamentStartTime && tournamentEndTime && (
               <p className={cx(styles.primaryContact)}>
@@ -81,7 +97,7 @@ const TournamentPage = () => {
               </p>
             )}
             <p className={cx(styles.primaryContact)}>
-              {`Primary Contact: ${data?.participant?.events?.[0]?.tournament?.primaryContact}`}
+              {`Primary Contact: ${tournamentData?.primaryContact}`}
             </p>
           </div>
           {tourneyStreams
